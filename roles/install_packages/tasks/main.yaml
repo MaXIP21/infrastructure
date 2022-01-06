@@ -1,0 +1,9 @@
+---
+- name: Install prerequisites
+  apt:
+    name: 
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
