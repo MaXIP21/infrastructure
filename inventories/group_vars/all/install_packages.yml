@@ -1,0 +1,11 @@
+---
+### Ubuntu Packages ###
+
+base_packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+  - lsb-release
+  
