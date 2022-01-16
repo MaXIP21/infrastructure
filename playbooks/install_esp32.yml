@@ -1,0 +1,8 @@
+---
+- hosts: all:worker_nodes
+  roles:
+    - install_packages
+    - python_install
+    - add_docker_repo
+    - reboot_machine
+    - nvidia_driver
