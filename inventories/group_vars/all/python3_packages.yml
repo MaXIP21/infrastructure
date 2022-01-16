@@ -1,4 +1,7 @@
 ---
+### Python packages ###
+
 python_packages:
   - python3
   - python3-pip
+  - python3-setuptools
