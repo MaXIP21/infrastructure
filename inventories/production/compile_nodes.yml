@@ -1,0 +1,5 @@
+---
+
+compile_nodes:
+  hosts:
+    192.168.1.145

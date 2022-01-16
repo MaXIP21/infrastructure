@@ -3,7 +3,3 @@
 worker_nodes:
   hosts:
     192.168.1.150
-
-compile_nodes:
-  hosts:
-    192.168.1.145

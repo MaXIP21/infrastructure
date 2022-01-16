@@ -1,5 +1,5 @@
 ---
-- name: Install packages that allow apt to be used over HTTPS
+- name: Install packages cor the Compiler nodes
   apt:
     name: "{{ esp32_packages }}"
     state: present
