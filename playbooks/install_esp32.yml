@@ -1,8 +1,5 @@
 ---
-- hosts: all:worker_nodes
+- hosts: all:compile_nodes
   roles:
-    - install_packages
+    - install_compile_nodes
     - python_install
-    - add_docker_repo
-    - reboot_machine
-    - nvidia_driver
