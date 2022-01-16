@@ -1,5 +1,6 @@
 ---
 - name: Install packages for the Compiler nodes
+  become: true
   apt:
     name: "{{ esp32_packages }}"
     state: present
