@@ -1,6 +1,44 @@
 ---
-- name: Install packages cor the Compiler nodes
+- name: Install packages for the Compiler nodes
   apt:
     name: "{{ esp32_packages }}"
     state: present
     update_cache: yes
+
+- name: Clone a github repository
+  git:
+    repo: https://github.com/espressif/esp-idf.git
+    dest: /home/ansible/esp-idf/
+    clone: yes
+    update: yes
+
+- name: Execute esp-idf Install script.
+  command: /home/ansible/esp-idf/install.sh esp32 >> /home/ansible/esp-idf.txt
+  become: true
+
+- name: Update user groups for esp-idf
+  file:
+    path: /home/ansible/esp-idf/
+    owner: ansible
+    group: ansible
+    mode: "0770"
+
+- name: Clone a Micropython repository
+  git:
+    repo: https://github.com/micropython/micropython
+    dest: /home/ansible/micropython/
+    clone: yes
+    update: yes
+
+- name: Build  target for Micropython
+  make:
+    chdir: /home/ansible/micropython/ports/esp32
+    file: /home/ansible/micropython/ports/esp32/Makefile
+
+- name: Update user groups for Micropython
+  file:
+    path: /home/ansible/micropython/
+    owner: ansible
+    group: ansible
+    mode: "0770"
+

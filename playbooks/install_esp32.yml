@@ -1,5 +1,5 @@
 ---
-- hosts: all:compile_nodes
+- hosts: compile_nodes
   roles:
     - install_compile_nodes
     - python_install

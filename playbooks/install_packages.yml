@@ -1,5 +1,5 @@
 ---
-- hosts: all:worker_nodes
+- hosts: worker_nodes
   roles:
     - install_packages
     - python_install
