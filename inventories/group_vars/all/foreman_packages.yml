@@ -4,6 +4,7 @@
 foreman_packages:
   - ca-certificates 
   - wget
+  - htop
 
 foreman_installer_package:
   - foreman-installer
