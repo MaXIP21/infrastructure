@@ -24,11 +24,18 @@
     dest: /home/ansible/
     remote_src: yes
 
-- name: Chech that {{ hostname }} resolves to host IP
+- name: Update Secret key
   lineinfile:
     path: /home/ansible/awx-{{ awx_version }}/installer/inventory
     regexp: "^secret_key=" 
     line: "secret_key={{ awx_secret_key }}"
+    state: present
+
+- name: Adding admin password
+  lineinfile:
+    path: /home/ansible/awx-{{ awx_version }}/installer/inventory
+    regexp: "^admin_password=" 
+    line: "admin_password={{ awx_admin_password }}"
     state: present
 
 - name: Run Ansible playbook on the host to create awx
