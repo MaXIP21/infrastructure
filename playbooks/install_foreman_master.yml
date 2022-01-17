@@ -6,4 +6,5 @@
     #- python_install
     #- add_docker_repo
     #- set_hostname
-    - foreman_master_install
+    #- foreman_master_install
+    - awx_install

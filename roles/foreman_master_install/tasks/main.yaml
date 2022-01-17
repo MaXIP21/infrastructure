@@ -1,3 +1,4 @@
+
 - name: Update apt and install foreman related packages
   become: yes
   apt: 
@@ -137,3 +138,18 @@
   args:
     executable: python3
   register: foreman_installer_output
+
+- name: Adding dhcpd.hosts config
+  blockinfile :
+    path: /etc/dhcp/dhcpd.hosts
+    block: |
+      host {{ item.hostname }} {
+        hardware ethernet {{ item.macaddress }};
+        fixed-address {{ item.ipaddress }};
+      }
+    state: present
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.hostname }}"
+  with_items:
+    - { hostname: test-vm2, macaddress: 08:00:27:6f:70:0c, ipaddress: 192.168.1.151 }
+    - { hostname: test-vm, macaddress: 08:00:27:47:ef:9c, ipaddress: 192.168.1.150 }
+    - { hostname: foreman-master, macaddress: e0:d5:5e:79:21:e0, ipaddress: 192.168.1.145 }

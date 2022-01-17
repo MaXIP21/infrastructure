@@ -1,0 +1,9 @@
+---
+### AWX packages ###
+
+awx_packages:
+  - nodejs 
+  - npm
+  - git 
+  - pwgen 
+  - vim
