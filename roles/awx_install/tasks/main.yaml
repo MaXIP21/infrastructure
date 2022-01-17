@@ -38,8 +38,8 @@
     line: "admin_password={{ awx_admin_password }}"
     state: present
 
-- name: Run Ansible playbook on the host to create awx
-  command: ansible-playbook -i inventory install.yml
-  args:
-    chdir: /home/ansible/awx-{{ awx_version }}/installer/
-  register: ansible_installer_output
+#- name: Run Ansible playbook on the host to create awx
+#  command: ansible-playbook -i inventory install.yml
+#  args:
+#    chdir: /home/ansible/awx-{{ awx_version }}/installer/
+#  register: ansible_installer_output
