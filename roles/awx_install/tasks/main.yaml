@@ -23,3 +23,16 @@
     src: https://github.com/ansible/awx/archive/{{ awx_version }}.zip
     dest: /home/ansible/
     remote_src: yes
+
+- name: Chech that {{ hostname }} resolves to host IP
+  lineinfile:
+    path: /home/ansible/awx-{{ awx_version }}/installer/inventory
+    regexp: "^secret_key=" 
+    line: "secret_key={{ awx_secret_key }}"
+    state: present
+
+- name: Run Ansible playbook on the host to create awx
+  command: ansible-playbook -i inventory install.yml
+  args:
+    chdir: /home/ansible/awx-{{ awx_version }}/installer/
+  register: ansible_installer_output

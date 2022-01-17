@@ -7,3 +7,4 @@ awx_packages:
   - git 
   - pwgen 
   - vim
+  - ansible
