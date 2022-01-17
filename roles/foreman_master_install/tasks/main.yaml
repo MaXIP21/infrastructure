@@ -35,8 +35,8 @@
 - name: Chech that {{ hostname }} resolves to host IP
   lineinfile:
     path: /etc/hosts
-    regexp: "^{{ default_ipv4_address | regex_escape() }}\\s+{{ foreman_fqdn | regex_escape() }}\\s+{{ hostname | regex_escape() }}\\s*$" 
-    line: "{{ default_ipv4_address }}\t{{ foreman_fqdn }} {{ hostname }}"
+    regexp: "^{{ default_ipv4_address | regex_escape() }}\\s+{{ hostname | regex_escape() }}\\s+{{ foreman_fqdn | regex_escape() }}\\s*$" 
+    line: "{{ default_ipv4_address }}\t{{ hostname }} {{ foreman_fqdn }}"
     state: present
     
 - name: Installing "{{ foreman_installer_package }}"
@@ -130,3 +130,10 @@
     path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
     regexp: '<initial_admin_password>'
     replace: "{{ initial_admin_password }}"
+
+- name: Run Foreman installer
+  become: yes
+  script: install_foreman.py
+  args:
+    executable: python3
+  register: foreman_installer_output

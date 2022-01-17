@@ -221,7 +221,7 @@ foreman_proxy:
   dns_listen_on: https
   dns_managed: true
   dns_provider: nsupdate
-  dns_interface: enp0s3
+  dns_interface: <foreman_interface>
   dns_zone: <foreman_hostname>
   dns_reverse:
   - 2.0.192.in-addr.arpa
