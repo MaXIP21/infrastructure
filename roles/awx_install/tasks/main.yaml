@@ -38,8 +38,17 @@
     line: "admin_password={{ awx_admin_password }}"
     state: present
 
-#- name: Run Ansible playbook on the host to create awx
-#  command: ansible-playbook -i inventory install.yml
-#  args:
-#    chdir: /home/ansible/awx-{{ awx_version }}/installer/
-#  register: ansible_installer_output
+- name: Configuring AWX web interface Port
+  lineinfile:
+    path: /home/ansible/awx-{{ awx_version }}/installer/inventory
+    regexp: "^host_port=" 
+    line: "host_port={{ awx_web_port }}"
+    state: present
+    
+
+- name: Run Ansible playbook on the host to create awx
+  become: yes
+  command: ansible-playbook -i inventory install.yml
+  args:
+    chdir: /home/ansible/awx-{{ awx_version }}/installer/
+  register: ansible_installer_output
