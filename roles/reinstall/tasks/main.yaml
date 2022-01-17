@@ -1,0 +1,18 @@
+- name: Set host build status to build in Foreman
+  uri:
+    url: "https://{{ reinstall_foreman_url }}/api/hosts/{{ reinstall_foreman_host_name }}"
+    method: PUT
+    body_format: json
+    user: "{{ reinstall_foreman_user }}"
+    password: "{{ reinstall_foreman_password }}"
+    body:
+      build: true
+    force_basic_auth: yes
+    validate_certs: no
+    status_code: 200
+  delegate_to: localhost
+
+- name: Rebooting the machine
+  become: true
+  reboot:
+  ignore_errors: yes

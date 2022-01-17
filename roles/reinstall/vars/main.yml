@@ -1,0 +1,5 @@
+---
+reinstall_foreman_url: 192.168.1.140
+reinstall_foreman_host_name: "{{ ansible_hostname }}.example.com"
+reinstall_foreman_user: admin
+reinstall_foreman_password: 3p9TaUrBnhGwgAhN

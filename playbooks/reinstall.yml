@@ -1,0 +1,13 @@
+---
+- hosts: all:foreman_master
+  become: no
+  tasks:
+    - name: Fail if Limit not set
+      fail:
+        msg: "The reinstall playbook needs a limit unless it's destructive. Please use --limit argument."
+      when: ansible_limit is not defined or ansible_limit|trim|length ==0
+
+- hosts: "{{ ansible_limit }}"
+  roles:
+    - reinstall
+

@@ -5,10 +5,12 @@
     name: "{{ awx_packages }}"
     state: latest
 
-#- name: Install npm node.js package globally.
-#  npm:
-#    name: npm
-#    global: yes
+- name: Install npm node.js package globally.
+  run_once: true
+  register: npm_result
+  npm:
+    name: npm
+    global: yes
 
 - name: Install requests version {{ requests_version }}
   pip:
@@ -52,3 +54,5 @@
   args:
     chdir: /home/ansible/awx-{{ awx_version }}/installer/
   register: ansible_installer_output
+  when: success == false
+  ignore_errors: yes

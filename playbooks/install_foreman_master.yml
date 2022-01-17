@@ -1,10 +1,11 @@
 ---
-- hosts: foreman_master
+- hosts: foreman*
   become: yes
   roles:
     #- install_packages
     #- python_install
     #- add_docker_repo
+    #- reboot_machine
     #- set_hostname
     #- foreman_master_install
     - awx_install
