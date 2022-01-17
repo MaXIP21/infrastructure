@@ -1,0 +1,25 @@
+- name: Update apt and install AWX related packages
+  become: yes
+  apt: 
+    update_cache: yes 
+    name: "{{ awx_packages }}"
+    state: latest
+
+- name: Install npm node.js package globally.
+  npm:
+    name: npm
+    global: yes
+
+- name: Install requests version "{{ requests_version }}" 
+  pip:
+    name: requests=={{ requests_version }}
+
+- name: Install Docker Compose version "{{ docker_compose_version }}" 
+  pip:
+    docker-compose=={{ docker_compose_version }}
+
+- name: Download and unpack AWX installer
+  ansible.builtin.unarchive:
+    src: https://github.com/ansible/awx/archive/{{ awx_version }}.zip
+    dest: /home/ansible/
+    remote_src: yes
