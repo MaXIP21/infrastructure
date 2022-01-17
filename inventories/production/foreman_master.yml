@@ -21,6 +21,3 @@ foreman_master:
     initial_admin_password: 3p9TaUrBnhGwgAhN
     requests_version: 2.22.0
     docker_compose_version: 1.25.0
-    awx_version: 17.1.0
-    awx_secret_key: "{{ lookup('password', '/dev/null length=25 chars=ascii_letters,digits') }}"
-    awx_admin_password: jKU9s3FphKbNUctvCjmZPeo0UBsjstBP
