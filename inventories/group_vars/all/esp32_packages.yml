@@ -1,5 +1,5 @@
 ---
-### Docker packages ###
+### ESP32 packages ###
 
 esp32_packages:
   - git

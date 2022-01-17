@@ -1,0 +1,9 @@
+---
+### Foreman packages ###
+
+foreman_packages:
+  - ca-certificates 
+  - wget
+
+foreman_installer_package:
+  - foreman-installer

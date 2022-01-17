@@ -1,0 +1,9 @@
+---
+- hosts: foreman_master
+  become: yes
+  roles:
+    #- install_packages
+    #- python_install
+    #- add_docker_repo
+    #- set_hostname
+    - foreman_master_install

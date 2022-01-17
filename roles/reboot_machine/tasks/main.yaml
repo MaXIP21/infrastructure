@@ -1,3 +1,4 @@
 - name: Reboot the machine and wait
+  become: true
   reboot:
     reboot_timeout: 3600

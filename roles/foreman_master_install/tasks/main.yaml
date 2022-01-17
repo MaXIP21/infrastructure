@@ -1,0 +1,59 @@
+- name: Update apt and install foreman related packages
+  become: yes
+  apt: 
+    update_cache: yes 
+    name: "{{ foreman_packages }}"
+    state: latest
+    
+- name: Ansible install Puppet deb file from url
+  become: yes
+  apt:
+    deb: "{{ puppet_source }}/{{ puppet_version }}"
+
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Add Foreman repository
+  
+  ansible.builtin.apt_repository:
+    update_cache: no
+    repo: deb http://deb.theforeman.org/ focal 3.0
+    state: present
+
+- name: Add Foreman plugins repository
+  ansible.builtin.apt_repository:
+    update_cache: no
+    repo: deb http://deb.theforeman.org/ plugins 3.0
+    state: present
+
+- name: Add Foreman apt key from url
+  ansible.builtin.apt_key:
+    url: https://deb.theforeman.org/pubkey.gpg
+    state: present
+    
+- name: Installing "{{ foreman_installer_package }}"
+  become: yes
+  apt: 
+    update_cache: yes 
+    name: "{{ foreman_installer_package }}"
+    state: latest
+
+- name: Create answers file directory
+  file:
+    path: /etc/foreman-installer/scenarios.d
+    mode: 0755
+    state: directory
+
+- name: Generate answers file
+  template:
+    src: foreman-answers.yaml
+    dest: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    mode: 0600
+
+- name: Configure answers of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_hostname>'
+    replace: "{{ hostname }}"
+

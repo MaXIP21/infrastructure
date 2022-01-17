@@ -1,0 +1,18 @@
+---
+
+foreman_master:
+  hosts:
+    192.168.1.145
+  vars: 
+    hostname: foreman1.example.com
+    puppet_source: https://apt.puppet.com
+    puppet_version: puppet6-release-focal.deb
+    foreman_interface: enp0s3
+    foreman_dhcp_range: "192.168.1.100 192.168.1.150"
+    foreman_dhcp_gateway: 192.168.1.1
+    foreman_dhcp_nameservers: 192.168.1.140
+    foreman_tftp_server_ip: 192.168.1.140
+    foreman_db_username: foreman
+    foreman_db_password: CGwvkBAZXZVr3dybMzsukZUFHNCg5m8B
+    initial_admin_username: admin
+    initial_admin_password: 3p9TaUrBnhGwgAhN
