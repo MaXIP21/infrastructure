@@ -5,18 +5,18 @@
     name: "{{ awx_packages }}"
     state: latest
 
-- name: Install npm node.js package globally.
-  npm:
-    name: npm
-    global: yes
+#- name: Install npm node.js package globally.
+#  npm:
+#    name: npm
+#    global: yes
 
-- name: Install requests version "{{ requests_version }}" 
+- name: Install requests version {{ requests_version }}
   pip:
     name: requests=={{ requests_version }}
 
-- name: Install Docker Compose version "{{ docker_compose_version }}" 
+- name: Install Docker Compose version {{ docker_compose_version }}
   pip:
-    docker-compose=={{ docker_compose_version }}
+    name: docker-compose=={{ docker_compose_version }}
 
 - name: Download and unpack AWX installer
   ansible.builtin.unarchive:
