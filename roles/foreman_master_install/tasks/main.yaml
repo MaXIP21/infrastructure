@@ -31,6 +31,13 @@
   ansible.builtin.apt_key:
     url: https://deb.theforeman.org/pubkey.gpg
     state: present
+
+- name: Chech that {{ hostname }} resolves to host IP
+  lineinfile:
+    path: /etc/hosts
+    regexp: "^{{ default_ipv4_address | regex_escape() }}\\s+{{ foreman_fqdn | regex_escape() }}\\s+{{ hostname | regex_escape() }}\\s*$" 
+    line: "{{ default_ipv4_address }}\t{{ foreman_fqdn }} {{ hostname }}"
+    state: present
     
 - name: Installing "{{ foreman_installer_package }}"
   become: yes
@@ -51,9 +58,75 @@
     dest: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
     mode: 0600
 
-- name: Configure answers of Foreman isntaller
+- name: Configure hostname of Foreman isntaller
   ansible.builtin.replace:
     path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
     regexp: '<foreman_hostname>'
     replace: "{{ hostname }}"
 
+- name: Configure DB Username of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_db_username>'
+    replace: "{{ foreman_db_username }}"
+
+- name: Configure DB Password of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_db_password>'
+    replace: "{{ foreman_db_password }}"
+
+- name: Configure TFTP Server IP of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_tftp_server_ip>'
+    replace: "{{ foreman_tftp_server_ip }}"
+
+
+- name: Configure Network Interface of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_interface>'
+    replace: "{{ foreman_interface }}"
+
+- name: Configure DHCP Gateway of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_dhcp_gateway>'
+    replace: "{{ foreman_dhcp_gateway }}"
+
+- name: Configure DHCP range of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_dhcp_range>'
+    replace: "{{ foreman_dhcp_range }}"
+
+- name: Configure DHCP failover address of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_dhcp_failover_address>'
+    replace: "{{ foreman_dhcp_failover_address }}"
+
+- name: Configure DB Password of Foreman installer
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_db_password>'
+    replace: "{{ foreman_db_password }}"
+
+- name: Configure Nameservers of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<foreman_dhcp_nameservers>'
+    replace: "{{ foreman_dhcp_nameservers }}"
+
+- name: Configure Admin username of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<initial_admin_username>'
+    replace: "{{ initial_admin_username }}"
+
+- name: Configure Admin Password of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<initial_admin_password>'
+    replace: "{{ initial_admin_password }}"

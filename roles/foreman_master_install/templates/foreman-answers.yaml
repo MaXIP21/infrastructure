@@ -14,8 +14,8 @@ foreman:
   db_host: 
   db_port: 
   db_database: 
-  db_username: foreman
-  db_password: CGwvkBAZXZVr3dybMzsukZUFHNCg5m8B
+  db_username: <foreman_db_username>
+  db_password: <foreman_db_password>
   db_sslmode: 
   db_root_cert: 
   db_pool: 5
@@ -192,7 +192,7 @@ foreman_proxy:
   dhcp_option_domain:
   - example.com
   dhcp_search_domains: 
-  dhcp_interface: enp0s3
+  dhcp_interface: <foreman_interface>
   dhcp_additional_interfaces: []
   dhcp_gateway: <foreman_dhcp_gateway>
   dhcp_range: <foreman_dhcp_range>
@@ -209,7 +209,7 @@ foreman_proxy:
   dhcp_omapi_port: 7911
   dhcp_peer_address: 
   dhcp_node_type: standalone
-  dhcp_failover_address: <foreman_tftp_server_ip>
+  dhcp_failover_address: <foreman_dhcp_failover_address>
   dhcp_failover_port: 519
   dhcp_max_response_delay: 30
   dhcp_max_unacked_updates: 10
