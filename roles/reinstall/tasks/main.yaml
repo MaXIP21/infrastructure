@@ -12,7 +12,9 @@
     status_code: 200
   delegate_to: localhost
 
-- name: Rebooting the machine
+- name: Rebooting the machine and wait for the reinstall
   become: true
   reboot:
   ignore_errors: yes
+  reboot_timeout: 3600
+
