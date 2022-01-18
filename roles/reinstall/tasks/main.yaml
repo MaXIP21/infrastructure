@@ -15,6 +15,5 @@
 - name: Rebooting the machine and wait for the reinstall
   become: true
   reboot:
+    reboot_timeout: 3600
   ignore_errors: yes
-  reboot_timeout: 3600
-

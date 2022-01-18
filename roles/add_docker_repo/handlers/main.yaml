@@ -1,0 +1,16 @@
+---
+- name: reload system
+  systemd:
+    daemon_reload: yes
+
+- name: reload systemd and restart docker
+  systemd:
+    daemon_reload: yes
+  notify:
+    - restart docker
+
+- name: docker status
+  service_facts:
+- debug:
+    msg: Docker installed!
+  when: "'docker' in services"
