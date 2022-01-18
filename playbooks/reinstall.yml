@@ -1,8 +1,8 @@
 ---
-- hosts: all:foreman_master
+- hosts: all:foreman*
   become: no
   tasks:
-    - name: Fail if Limit not set
+    - name: Fail in case the limit is not present.
       fail:
         msg: "The reinstall playbook needs a limit unless it's destructive. Please use --limit argument."
       when: ansible_limit is not defined or ansible_limit|trim|length ==0
@@ -11,3 +11,5 @@
   roles:
     - reinstall
 
+- name: Include reinstall playbook after the OS is ready.
+  import_playbook: install_foreman_master.yml
