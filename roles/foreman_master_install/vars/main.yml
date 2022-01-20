@@ -13,3 +13,5 @@ foreman_db_username: foreman
 foreman_db_password: CGwvkBAZXZVr3dybMzsukZUFHNCg5m8B
 initial_admin_username: admin
 initial_admin_password: 3p9TaUrBnhGwgAhN
+dhcp_server: true
+dhcp_plugin: true

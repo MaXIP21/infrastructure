@@ -17,8 +17,8 @@
     update_cache: yes 
     name: "{{ docker_packages }}"
     state: latest
-  notify:
-  - docker status
+  #notify:
+  #- docker status
 
 - name: Install Docker Module for Python
   become: yes

@@ -132,7 +132,21 @@
     regexp: '<initial_admin_password>'
     replace: "{{ initial_admin_password }}"
 
+- name: Configuring DHCP server of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<dhcp_server>'
+    replace: "{{ dhcp_server }}"
+
+- name: Configuring isc-DHCP plugin of Foreman isntaller
+  ansible.builtin.replace:
+    path: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    regexp: '<dhcp_plugin>'
+    replace: "{{ dhcp_plugin }}"
+
 - name: Run Foreman installer
+  retries: 2
+  delay: 5
   become: yes
   script: install_foreman.py
   args:
